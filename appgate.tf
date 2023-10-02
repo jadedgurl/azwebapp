@@ -12,7 +12,7 @@ resource "azurerm_subnet" "backend" {
   address_prefixes     = ["10.254.2.0/24"]
 }
 
-resource "azurerm_public_ip" "mcitptpip" {
+resource "azurerm_public_ip" "mcitpip" {
   name                = "mcit-pip"
   resource_group_name = azurerm_resource_group.butterfly.name
   location            = azurerm_resource_group.butterfly.location
