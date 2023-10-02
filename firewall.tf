@@ -1,6 +1,6 @@
 resource "azurerm_web_application_firewall_policy" "mcit2023" {
   for_each            = {for policy in local.appgt: policy=>policy}
-  name                = "mcit2023-wafpolicy"
+  name                = "mcit2023-wafpolicy-${each.key}"
   resource_group_name = azurerm_resource_group.butterfly.name
   location            = azurerm_resource_group.butterfly.location
 
