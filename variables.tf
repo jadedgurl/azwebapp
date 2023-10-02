@@ -1,4 +1,4 @@
-variable "client_id"{
+variable "application_id"{
   type=string
 }
 variable "client_secret"{
