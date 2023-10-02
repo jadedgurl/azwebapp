@@ -8,7 +8,7 @@ resource "azurerm_subnet" "frontend" {
 resource "azurerm_subnet" "backend" {
   name                 = "backend"
   resource_group_name  = azurerm_resource_group.butterfly.name
-  virtual_network_name = azurerm_virtual_network.butterfly.name
+  virtual_network_name = azurerm_virtual_network.mcitnet.name
   address_prefixes     = ["10.254.2.0/24"]
 }
 
