@@ -77,7 +77,7 @@ resource "azurerm_application_gateway" "appgate" {
   rule_set_version = 3.1
   }
   http_listener {
-    for_each = azurerm_web_application_firewall_policy.mcit2023
+    for_each                       = azurerm_web_application_firewall_policy.mcit2023
     name                           = local.listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
