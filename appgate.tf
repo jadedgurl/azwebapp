@@ -1,21 +1,21 @@
 resource "azurerm_subnet" "frontend" {
   name                 = "frontend"
-  resource_group_name  = azurerm_resource_group.azureresourcegroup.name
-  virtual_network_name = azurerm_virtual_network.mcitvmnet.name
+  resource_group_name  = azurerm_resource_group.butterfly.name
+  virtual_network_name = azurerm_virtual_network.mcitnet.name
   address_prefixes     = ["10.254.0.0/24"]
 }
 
 resource "azurerm_subnet" "backend" {
   name                 = "backend"
-  resource_group_name  = azurerm_resource_group.azureresourcegroup.name
-  virtual_network_name = azurerm_virtual_network.mcitvmnet.name
+  resource_group_name  = azurerm_resource_group.butterfly.name
+  virtual_network_name = azurerm_virtual_network.mcitnet.name
   address_prefixes     = ["10.254.2.0/24"]
 }
 
 resource "azurerm_public_ip" "mcitptpip" {
   name                = "mcit-pip"
-  resource_group_name = azurerm_resource_group.azureresourcegroup.name
-  location            = azurerm_resource_group.azureresourcegroup.location
+  resource_group_name = azurerm_resource_group.butterfly.name
+  location            = azurerm_resource_group.butterfly.location
   allocation_method   = "Dynamic"
 }
 
@@ -33,8 +33,8 @@ locals {
 resource "azurerm_application_gateway" "appgate" {
   for_each            = {for app in local.appgt_name: app=>app}
   name                = "${var.prefix}-appgateway-${each.key}"
-  resource_group_name = azurerm_resource_group.azureresourcegroup.name
-  location            = azurerm_resource_group.azureresourcegroup.location
+  resource_group_name = azurerm_resource_group.butterfly.name
+  location            = azurerm_resource_group.butterfly.location
   firewall_policy_id  = azurerm_web_application_firewall_policy.wafpol.id
 
   sku {
@@ -55,7 +55,7 @@ resource "azurerm_application_gateway" "appgate" {
 
   frontend_ip_configuration {
     name                 = local.frontend_ip_configuration_name
-    public_ip_address_id = azurerm_public_ip.mcitptpip.id
+    public_ip_address_id = azurerm_public_ip.mcitpip.id
   }
 
   backend_address_pool {
